@@ -13,7 +13,8 @@
       <TextBlock  TextAlignment="Center" Width="400" Text="Name" />
       <TextBlock  TextAlignment="Center" Text="Autors" />
     </DockPanel>
-    <ListBox Margin="10" Items="{Binding Music}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+    <ListBox Margin="10" Items="{Binding Music}" Height="325">
       <ListBox.ItemTemplate>
        <DataTemplate>
         
@@ -24,5 +25,6 @@
         </DataTemplate>
       </ListBox.ItemTemplate>
     </ListBox>
+      </ScrollViewer>
   </StackPanel>
 </Window>
