@@ -1,0 +1,67 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\vasko\\source\\repos\\AvaloniaApplication2\\AvaloniaApplication2\\AvaloniaApplication2.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\vasko\\source\\repos\\AvaloniaApplication2\\AvaloniaApplication2\\AvaloniaApplication2.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\vasko\\source\\repos\\AvaloniaApplication2\\AvaloniaApplication2\\AvaloniaApplication2.csproj",
+        "projectName": "AvaloniaApplication2",
+        "projectPath": "C:\\Users\\vasko\\source\\repos\\AvaloniaApplication2\\AvaloniaApplication2\\AvaloniaApplication2.csproj",
+        "packagesPath": "C:\\Users\\vasko\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\vasko\\source\\repos\\AvaloniaApplication2\\AvaloniaApplication2\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\vasko\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "dependencies": {
+            "Avalonia": {
+              "target": "Package",
+              "version": "[0.10.0, )"
+            },
+            "Avalonia.Desktop": {
+              "target": "Package",
+              "version": "[0.10.0, )"
+            },
+            "Avalonia.Diagnostics": {
+              "target": "Package",
+              "version": "[0.10.0, )"
+            },
+            "HtmlAgilityPack": {
+              "target": "Package",
+              "version": "[1.11.32, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win7-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}
