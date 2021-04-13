@@ -89,8 +89,10 @@ namespace AvaloniaApplication2.ViewModels
 
             foreach (var aut in myList)
             {
-                autors += aut + " ; ";
+                autors += aut + " , ";
             }
+
+           
             return autors;
         }
         public event PropertyChangedEventHandler PropertyChanged;
