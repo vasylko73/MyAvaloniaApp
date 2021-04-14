@@ -8,7 +8,7 @@
   <StackPanel Grid.Row="1">
     <TextBox Grid.Row="1" Name="MyTextBox" Margin="5" Text="{Binding Url}" />
     
-<Button Grid.Row="2" Content="OK" Margin="5" Command="{Binding click}"/>
+<Button Grid.Row="2" Content="OK" Margin="5" Command="{Binding ParseClick}"/>
     <DockPanel>
       <TextBlock  TextAlignment="Center" Width="400" Text="Name" />
       <TextBlock  TextAlignment="Center" Text="Autors" />

@@ -24,11 +24,11 @@ namespace AvaloniaApplication2.ViewModels
             Music = new ObservableCollection<Music>();
         }
 
-        public void Add(Dictionary<string, List<string>> internalDictionary, string key, string value)
+        public void AddToDictionary(Dictionary<string, List<string>> DictionaryOfMusic, string key, string value)
         {
-            if (internalDictionary.ContainsKey(key))
+            if (DictionaryOfMusic.ContainsKey(key))
             {
-                List<string> list = internalDictionary[key];
+                List<string> list = DictionaryOfMusic[key];
                 if (list.Contains(value) == false)
                 {
                     list.Add(value);
@@ -38,13 +38,13 @@ namespace AvaloniaApplication2.ViewModels
             {
                 List<string> list = new List<string>();
                 list.Add(value);
-                internalDictionary.Add(key, list);
+                DictionaryOfMusic.Add(key, list);
             }
         }
 
         public void ParseHTML(string path)
         {
-            Dictionary<string, List<string>> internalDictionary = new Dictionary<string, List<string>>();
+            Dictionary<string, List<string>> DictionaryOfMusic = new Dictionary<string, List<string>>();
 
             HtmlWeb web = new HtmlWeb();
             HtmlDocument document = web.Load(path);
@@ -59,11 +59,11 @@ namespace AvaloniaApplication2.ViewModels
             {
                 nodes[i].ChildNodes[1].SelectNodes("//span[@class='jsx-819956409 SongDescItem']//a").ToArray();
                 for (int j = 0; j < nodes[i].ChildNodes[1].ChildNodes.Count; ++j)
-                   Add(internalDictionary, nodes[i].ChildNodes[0].InnerText, nodes[i].ChildNodes[1].ChildNodes[j].InnerText);
+                   AddToDictionary(DictionaryOfMusic, nodes[i].ChildNodes[0].InnerText, nodes[i].ChildNodes[1].ChildNodes[j].InnerText);
             }
 
             
-            foreach (var mu in internalDictionary)
+            foreach (var mu in DictionaryOfMusic)
             {
                 string autors = null;
                 string music = null;
@@ -78,7 +78,7 @@ namespace AvaloniaApplication2.ViewModels
 
         }
 
-        public void click()
+        public void ParseClick()
         {
             
             ParseHTML(Url);
@@ -91,10 +91,13 @@ namespace AvaloniaApplication2.ViewModels
             {
                 autors += aut + " , ";
             }
+            char[] TrimChar = {  ',', ' ' };
 
+            autors = autors.TrimEnd(TrimChar);
            
             return autors;
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
