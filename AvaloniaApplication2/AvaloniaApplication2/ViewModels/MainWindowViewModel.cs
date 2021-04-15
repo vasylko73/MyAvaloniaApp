@@ -9,79 +9,52 @@ using System.Text;
 using System.Threading.Tasks;
 using AvaloniaApplication2.Models;
 using HtmlAgilityPack;
+using Microsoft.CodeAnalysis.Operations;
 
 namespace AvaloniaApplication2.ViewModels
 {
     class MainWindowViewModel : INotifyPropertyChanged
     {
 
-        public ObservableCollection<Music> Music { get; set; }
+        
         private string _URL { get; set; }
         public string Url{get => _URL; set=> _URL = value; }
-        
+
+        public PlayList Playlist
+        {
+            get => _PlayList;
+            set
+            {
+                _PlayList = value;
+                OnPropertyChanged(nameof(Playlist));
+            }
+        }
+
+        private PlayList _PlayList;
         public MainWindowViewModel()
         {
-            Music = new ObservableCollection<Music>();
+            Playlist = new PlayList();
         }
 
-        public void AddToDictionary(Dictionary<string, List<string>> DictionaryOfMusic, string key, string value)
+        public void Parse(string URL)
         {
-            if (DictionaryOfMusic.ContainsKey(key))
-            {
-                List<string> list = DictionaryOfMusic[key];
-                if (list.Contains(value) == false)
-                {
-                    list.Add(value);
-                }
-            }
-            else
-            {
-                List<string> list = new List<string>();
-                list.Add(value);
-                DictionaryOfMusic.Add(key, list);
-            }
-        }
-
-        public void ParseHTML(string path)
-        {
+            string playlist=null;
             Dictionary<string, List<string>> DictionaryOfMusic = new Dictionary<string, List<string>>();
-
-            HtmlWeb web = new HtmlWeb();
-            HtmlDocument document = web.Load(path);
-
-
-            HtmlNode[] nodes = document.DocumentNode.SelectNodes("//div[@class='jsx-2309930405 SongListWrap']//div[@class='jsx-2980427943 jsx-1241753679 songDetail time']").ToArray();
-
-            var playlist = document.DocumentNode.SelectSingleNode("//h1[@class='jsx-3737142392 title']").InnerText;
-
-
-            for (int i = 0; i < nodes.Length; ++i)
-            {
-                nodes[i].ChildNodes[1].SelectNodes("//span[@class='jsx-819956409 SongDescItem']//a").ToArray();
-                for (int j = 0; j < nodes[i].ChildNodes[1].ChildNodes.Count; ++j)
-                   AddToDictionary(DictionaryOfMusic, nodes[i].ChildNodes[0].InnerText, nodes[i].ChildNodes[1].ChildNodes[j].InnerText);
-            }
-
-            
+            HtmlParser parser = new HtmlParser();
+            DictionaryOfMusic = parser.ParseHTML(Url, out playlist);
             foreach (var mu in DictionaryOfMusic)
             {
                 string autors = null;
                 string music = null;
                 music = mu.Key.Replace("&#x27;", "'");
-                
+
                 autors = PrintList(mu.Value);
                 autors.Replace("&#x27;", "'");
-               
-              Music.Add(new Music{PlayList = playlist,Autors = autors,MusicName = music});
+
+                Playlist.Track.Add(new Track() {Autors = autors, MusicName = music});
             }
 
-
-        }
-
-        public void ParseClick()
-        {
-            
-            ParseHTML(Url);
+            Playlist.PlayListName = playlist;
         }
         public string PrintList(List<string> myList)
         {
@@ -89,14 +62,21 @@ namespace AvaloniaApplication2.ViewModels
 
             foreach (var aut in myList)
             {
-                autors += aut + " , ";
+                autors += aut + ", ";
             }
-            char[] TrimChar = {  ',', ' ' };
+            char[] TrimChar = { ',', ' ' };
 
             autors = autors.TrimEnd(TrimChar);
-           
+
             return autors;
         }
+
+        public void ParseClick()
+        {
+            Parse(Url);
+           
+        }
+        
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

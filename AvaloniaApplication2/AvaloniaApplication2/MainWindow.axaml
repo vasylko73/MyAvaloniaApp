@@ -5,26 +5,37 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="AvaloniaApplication2.MainWindow"
         Title="AvaloniaApplication2">
-  <StackPanel Grid.Row="1">
-    <TextBox Grid.Row="1" Name="MyTextBox" Margin="5" Text="{Binding Url}" />
-    
-<Button Grid.Row="2" Content="OK" Margin="5" Command="{Binding ParseClick}"/>
-    <DockPanel>
-      <TextBlock  TextAlignment="Center" Width="400" Text="Name" />
-      <TextBlock  TextAlignment="Center" Text="Autors" />
-    </DockPanel>
-    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-    <ListBox Margin="10" Items="{Binding Music}" Height="325">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="120" />
+      <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+    <StackPanel Grid.Row="0">
+  
+      <TextBox  Name="MyTextBox" Margin="5" Text="{Binding Url}" />
+      
+      <Button Content="Parse" Margin="5" Command="{Binding ParseClick}"/>
+      <DockPanel HorizontalAlignment="Center" Height="30">
+        <TextBlock    Text="PlayList: " />
+        <TextBlock   Text="{Binding Playlist.PlayListName}" />
+      </DockPanel>
+      <DockPanel >
+        <TextBlock Margin="90 0 0 0"  Width="400" Text="Name" />
+        <TextBlock   Text="Authors" />
+      </DockPanel>
+    </StackPanel>
+    <ListBox Grid.Row="1" Margin="10" Items="{Binding Playlist.Track}"  >
       <ListBox.ItemTemplate>
        <DataTemplate>
         
-          <DockPanel>
-            <TextBlock  DockPanel.Dock="Left" Width="400" Text="{Binding MusicName}" />
+          <DockPanel HorizontalAlignment="Center">
+            <TextBlock  DockPanel.Dock="Left" Width="400"  Text="{Binding MusicName}" />
           <TextBlock  DockPanel.Dock="Right" Text="{Binding Autors}" />
           </DockPanel>
         </DataTemplate>
       </ListBox.ItemTemplate>
     </ListBox>
-      </ScrollViewer>
-  </StackPanel>
+     
+  
+  </Grid>
 </Window>

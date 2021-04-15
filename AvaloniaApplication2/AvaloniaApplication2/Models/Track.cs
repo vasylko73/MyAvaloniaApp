@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace AvaloniaApplication2.Models
 {
-    class Music
+    class Track
     {
-        public string PlayList { get; set ; }
         public string MusicName { get; set; }
         public string Autors { get; set; }
        
